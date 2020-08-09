@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TechSelectOptions from "../techs/TechSelectOptions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addLog } from "../../actions/logActions";
@@ -23,12 +24,14 @@ const AddLogModal = ({ addLog }) => {
       addLog(newLog);
 
       M.toast({ html: `Log added by ${tech}` });
-      // Clear fields
+
+      // Clear Fields
       setMessage("");
       setTech("");
       setAttention(false);
     }
   };
+
   return (
     <div id="add-log-modal" className="modal" style={modalStyle}>
       <div className="modal-content">
@@ -41,7 +44,7 @@ const AddLogModal = ({ addLog }) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <label htmlFor="message" className="ative">
+            <label htmlFor="message" className="active">
               Log Message
             </label>
           </div>
@@ -58,9 +61,7 @@ const AddLogModal = ({ addLog }) => {
               <option value="" disabled>
                 Select Technician
               </option>
-              <option value="John Doe">John Doe</option>
-              <option value="John Doe">Sam Smith</option>
-              <option value="John Doe">John Doe</option>
+              <TechSelectOptions />
             </select>
           </div>
         </div>
@@ -82,13 +83,11 @@ const AddLogModal = ({ addLog }) => {
           </div>
         </div>
       </div>
-
       <div className="modal-footer">
         <a
           href="#!"
           onClick={onSubmit}
-          className="modal-close waves-effect
-            blue waves-light btn"
+          className="modal-close waves-effect blue waves-light btn"
         >
           Enter
         </a>
@@ -105,4 +104,5 @@ const modalStyle = {
   width: "75%",
   height: "75%",
 };
+
 export default connect(null, { addLog })(AddLogModal);

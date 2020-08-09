@@ -1,8 +1,8 @@
-import React, { useState, userEffect, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import TechSelectOptions from "../techs/TechSelectOptions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import M from "materialize-css/dist/js/materialize.min.js";
-
 import { updateLog } from "../../actions/logActions";
 
 const EditLogModal = ({ current, updateLog }) => {
@@ -32,12 +32,14 @@ const EditLogModal = ({ current, updateLog }) => {
 
       updateLog(updLog);
       M.toast({ html: `Log updated by ${tech}` });
-      // Clear fields
+
+      // Clear Fields
       setMessage("");
       setTech("");
       setAttention(false);
     }
   };
+
   return (
     <div id="edit-log-modal" className="modal" style={modalStyle}>
       <div className="modal-content">
@@ -64,9 +66,7 @@ const EditLogModal = ({ current, updateLog }) => {
               <option value="" disabled>
                 Select Technician
               </option>
-              <option value="John Doe">John Doe</option>
-              <option value="John Doe">Sam Smith</option>
-              <option value="John Doe">John Doe</option>
+              <TechSelectOptions />
             </select>
           </div>
         </div>
@@ -88,13 +88,11 @@ const EditLogModal = ({ current, updateLog }) => {
           </div>
         </div>
       </div>
-
       <div className="modal-footer">
         <a
           href="#!"
           onClick={onSubmit}
-          className="modal-close waves-effect
-            blue waves-light btn"
+          className="modal-close waves-effect blue waves-light btn"
         >
           Enter
         </a>
@@ -116,4 +114,5 @@ EditLogModal.propTypes = {
 const mapStateToProps = (state) => ({
   current: state.log.current,
 });
+
 export default connect(mapStateToProps, { updateLog })(EditLogModal);
